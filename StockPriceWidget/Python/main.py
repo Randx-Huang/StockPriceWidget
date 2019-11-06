@@ -37,12 +37,11 @@ if __name__ == '__main__':
         
         file_handler.close()
         logger.removeHandler(file_handler)
+        #exit(1)
     except Exception as ex:
         logger.exception(ex.with_traceback)
+        #exit(1)
  
-#
-for 測試用
-#
-
+    
 #print(getStockList())
-#print(getPriceInfo('tse_2330.TW|otc_1565.TW|StockQ_KOSPI.Index|tse_2330.TW|StockQ_SHSZ300.Index|otc_00696B.TW','1234564878'))
+#print(getPriceInfo('tse_2330.tw|otc_1565.tw|StockQ_KOSPI.index|tse_2317.tw|StockQ_SHSZ300.index|otc_00696B.tw','1234564878'))

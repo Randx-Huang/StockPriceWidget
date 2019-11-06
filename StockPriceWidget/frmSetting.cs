@@ -35,7 +35,7 @@ namespace StockPriceWidget
             InitializeComponent();
             StockCollection = stockNoCollection;
             this.memoEdit1.Lines = StockCollection
-                .Select(data => $"{data.StockNo} {data.StockName} {data.Market}")
+                .Select(data => $"{data.StockNo} {data.StockName} {data.Market} {data.Exchange}")
                 .ToArray();
             _CP.ReceivedData += Cp_ReceivedData;
             _FileName = pythonFileName;
@@ -182,10 +182,18 @@ namespace StockPriceWidget
             int.TryParse(this.txtTimerInterval.EditValue?.ToString(), out int ti);
             TimerInterval = ti;
 
-            foreach (var stockInfo in this.memoEdit1.Lines)
+            foreach (var addedStock in this.memoEdit1.Lines)
             {
-                var si = stockInfo.Split(new char[] { ' ' });
-                CollectionAdd(si[0], si[1], si[3]);
+                var stock = addedStock.Split(new char[] { ' ' });
+
+                if (stock.Length > 3)
+                {
+                    CollectionAdd(stock[0], stock[1], stock[3], stock[2]);
+                }
+                else
+                {
+                    CollectionAdd(stock[0], stock[1], "StockQ" , stock[2]);
+                }
             }
 
             this.DialogResult = DialogResult.OK;
@@ -234,16 +242,14 @@ namespace StockPriceWidget
         /// <param name="stockNo">股票代碼</param>
         /// <param name="stockName">股票名稱</param>
         /// <param name="exchange">交易所</param>
-        public void CollectionAdd(string stockNo, string stockName, string exchange)
+        public void CollectionAdd(string stockNo, string stockName, string exchange, string market )
         {
-            var exch = this.cbxExch.EditValue?.ToString()?.ToLower() ?? "tw";
-
             this.StockCollection.Add(new ucStockInfo.DataField()
             {
                 StockNo = stockNo,
-                Exchange = exchange,
+                Exchange = exchange ,
                 StockName = stockName,
-                Market = exch 
+                Market = market
             });
         }
 
