@@ -16,7 +16,7 @@ namespace StockPriceWidget
     public partial class frmWidget : DevExpress.XtraEditors.XtraForm
     {
         static string _SettingFilePath = @".\setting.json"; //已儲存的設定檔
-        static string _FileName = $@"{System.Windows.Forms.Application.StartupPath}\Python\main.py";//python進入點
+        static string _FileName = @".\Python\main.py";//python進入點
         static Dictionary<string, DockPanel> _StockCollection;//已加入的股票Collection
         static object _Obj = new object();//lock obejct
         System.Timers.Timer _ProgressTimer = new System.Timers.Timer();//更新資訊

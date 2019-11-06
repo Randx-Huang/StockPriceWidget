@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="chart_stock.ico" />
+    <Content Include="program.PNG" />
     <Content Include="Python\main.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
